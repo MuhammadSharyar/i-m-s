@@ -15,6 +15,7 @@ export default function Inventory() {
   const [showAddProductModal, setShowAddProductModal] = useState(false);
   const [docs, setDocs] = useState();
   const [tempDocs, setTempDocs] = useState();
+  const [reportDocs, setReportDocs] = useState();
   const [search, setSearch] = useState("");
   const [selectedReport, setSelectedReport] = useState("Reports");
   const [selectedView, setSelectedView] = useState("Grid");
@@ -34,6 +35,64 @@ export default function Inventory() {
         .includes(search.toLowerCase())
     );
     setTempDocs(searchedProducts);
+  };
+
+  const getStockTakeReport = async () => {
+    var csvRow = [];
+    var A = [["Id", "Name", "Cost", "Stock"]];
+
+    const dbRef = collection(db, "products");
+    await getDocs(dbRef).then(async (query) => {
+      query.docs.map((doc, index) => {
+        const data = doc._document.data.value.mapValue.fields;
+        A.push([
+          index,
+          data.title.stringValue,
+          data.cost.stringValue,
+          data.stock.stringValue,
+        ]);
+      });
+      for (var i = 0; i < A.length; ++i) {
+        csvRow.push(A[i].join(","));
+      }
+      var csvString = csvRow.join("%0A");
+      var a = document.createElement("a");
+      a.href = "data:attachment/csv," + csvString;
+      a.target = "_Blank";
+      a.download = "StockTakeReport.csv";
+      document.body.appendChild(a);
+      a.click();
+    });
+  };
+
+  const getPurchaseItemReport = async () => {
+    var csvRow = [];
+    var A = [["Id", "Name", "Cost", "Stock"]];
+
+    const dbRef = collection(db, "products");
+    await getDocs(dbRef).then(async (query) => {
+      query.docs.map((doc, index) => {
+        const data = doc._document.data.value.mapValue.fields;
+        if (parseInt(data.stock.stringValue) < 50) {
+          A.push([
+            index,
+            data.title.stringValue,
+            data.cost.stringValue,
+            data.stock.stringValue,
+          ]);
+        }
+      });
+      for (var i = 0; i < A.length; ++i) {
+        csvRow.push(A[i].join(","));
+      }
+      var csvString = csvRow.join("%0A");
+      var a = document.createElement("a");
+      a.href = "data:attachment/csv," + csvString;
+      a.target = "_Blank";
+      a.download = "PurchaseItemReport.csv";
+      document.body.appendChild(a);
+      a.click();
+    });
   };
 
   useEffect(() => {
@@ -91,7 +150,11 @@ export default function Inventory() {
               value={selectedReport}
               onChange={(e) => {
                 setSelectedReport(e.target.value);
-                // router.push("/reports/stock-take-report");
+                if (e.target.value == "Stock Take Report") {
+                  getStockTakeReport();
+                } else if (e.target.value == "Purchase Item Report") {
+                  getPurchaseItemReport();
+                }
               }}
             >
               <option value={"Reports"}>Reports</option>
