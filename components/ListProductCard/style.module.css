@@ -1,0 +1,37 @@
+.cardContainer {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding: 0 1em;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cardContainer:hover {
+  transform: scale(1.07);
+  transition-duration: 0.1s;
+}
+
+.imageContainer,
+.productTitle,
+.productCost,
+.productStock,
+.productOption {
+  flex: 0.5;
+  font-size: smaller;
+}
+
+.heading {
+  font-weight: 600;
+  margin-right: 0.7em;
+}
+
+.cardContainer div {
+  display: flex;
+}
+
+.productImage {
+  height: 3.5em;
+  width: 4em;
+  object-fit: cover;
+}

@@ -1,0 +1,166 @@
+.container1 {
+  display: flex;
+  height: 20vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.loadingContainer {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 60vw;
+  height: 50vh;
+}
+
+.loader {
+  font-size: x-large;
+  font-family: "Lobster", cursive;
+}
+
+.listView {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20%;
+  row-gap: 0.5em;
+}
+
+.productContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 2em;
+  padding: 0 20%;
+}
+
+.searchContainer {
+  margin-right: 2em;
+  margin-left: 2em;
+  width: 30%;
+}
+
+.searchField {
+  height: 2.5em;
+  padding: 7px;
+  border-right: none;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  width: 80%;
+  border: 1px solid var(--grey);
+}
+
+.searchBtn {
+  height: 2.5em;
+  border: 1px solid var(--grey);
+  border-left: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 0 7px;
+  background-color: var(--primary);
+  width: 20%;
+  cursor: pointer;
+}
+
+.searchBtn:focus {
+  background-color: var(--primary-dark);
+}
+
+.searchField,
+.searchBtn {
+  outline: none;
+}
+
+.buttonContainer {
+  display: flex;
+  align-items: center;
+}
+
+.buttonContainer button,
+.dropdownContainer {
+  height: 2.5em;
+  padding: 0 7px;
+  border: 1px solid var(--grey);
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #fff;
+  outline: none;
+}
+
+.buttonContainer select {
+  margin-left: 2em;
+}
+
+.buttonContainer button:active {
+  background-color: rgba(197, 197, 197, 0.712);
+}
+
+.closeBtnContainer {
+  width: 40%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.closeBtn {
+  width: 3%;
+  border-radius: 0 4px 0 4px;
+  border: none;
+  border-top: 1px solid #242424;
+  border-right: 1px solid #242424;
+  background-color: var(--red);
+  color: #f6f6f6;
+  font-size: medium;
+  position: absolute;
+  z-index: 5;
+}
+
+@media (max-width: 700px) {
+  .container1 {
+    display: flex;
+    flex-direction: column;
+    height: 20vh;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .searchContainer {
+    margin-right: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .searchField {
+    height: 2.5em;
+    padding: 7px;
+    border-radius: 5px;
+    width: 80%;
+    border: 1px solid var(--grey);
+    margin-bottom: 1em;
+  }
+
+  .searchBtn {
+    display: none;
+  }
+
+  .productContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5em;
+    padding: 0 5%;
+  }
+
+  .closeBtnContainer {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .closeBtn {
+    width: 15%;
+    border-radius: 0 4px 0 4px;
+    border: none;
+    border-top: 1px solid #242424;
+    border-right: 1px solid #242424;
+  }
+}

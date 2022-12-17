@@ -1,0 +1,7 @@
+.dropdown {
+  padding: 7px;
+  outline: none;
+  border-radius: 4px;
+  border: 1px solid var(--grey);
+  margin-bottom: 0.4rem;
+}
